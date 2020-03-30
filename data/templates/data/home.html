@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+table, td, th {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 80%;
+  
+}
+
+th {
+  height: 80px;
+  padding-left: 10px;
+}
+.topnav {
+  overflow: hidden;
+  background-color: #67b8b1;
+  padding:0px;
+}
+
+
+.color{
+  color:white;
+  font-size:40px;
+  padding: 75px;
+  margin-top: 15px;
+}
+
+.right{
+  text-align: right;
+}
+
+.background{
+  background-color:none ;
+  float: right;
+  font-size: 15px;
+}
+
+
+.top{
+  text-align: top;
+}
+.colorupload{
+  color:#67b8b1;
+}
+
+.center{
+  margin-left: 80px;
+  margin-right: 40px;
+}
+.w3-bar .w3-button {
+            padding: 16px;
+        }
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #02fae2;
+  color: white;
+}
+
+.padding{
+  padding-left: 80px;
+}
+.padding-right{
+  padding-right:40px;
+}
+
+</style>
+</head>
+<body>
+<!--Navigation Bar-->
+<div class="w3-top">
+        <div class="w3-bar w3-white w3-card " id="myNavbar">
+            <a href="#home" class="w3-bar-item w3-button w3-wide">MOD</a>
+            <!--right sided navigation bar-->
+            <div class="w3-right w3-hide-small">
+                <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+                <a href="#howitworks" class="w3-bar-item w3-button"><i class="fa fa-th"></i> HOW IT WORKS</a>
+                <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
+                <a href="http://localhost:8000/logout" class="w3-bar-item w3-button"></i> LOG OUT</a>
+            </div>
+            <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+              
+            
+            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </div>
+    <!-- Sidebar on small screens when clicking the menu icon -->
+    <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+        <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+        <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
+        <a href="#howitworks" onclick="w3_close()" class="w3-bar-item w3-button">HOW IT WORKS</a>
+        <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
+    </nav>
+    
+    <br>
+    </br>
+
+<div class = "padding">
+  <br>
+  <input type="text" placeholder="Search..">
+  <button type = "submit"><i class = "fa fa-search"></i></button>
+  <input type="text" placeholder="Filter..">
+  <button type = "submit"><i class = "fa fa-search"></i></button>
+</div>
+<br>
+<div class = "padding">
+ <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="myfile">
+    <button type="submit">Upload</button>
+  </form>
+</div>
+<div class = "right padding-right">
+  <button style="font-size:24px"><i class="fa fa-trash-o"></i></button>
+  <button style="font-size:24px"><i class="fa fa-save"></i></button>
+  <button style="font-size:24px"><i class="fa fa-merge"> &#10971;</i></button>
+  <button style="font-size:24px"><i class="fa fa-plus"></i></button>
+  <button style="font-size:24px"><i class="fa fa-sort"></i></button>
+</div>
+<br>
+<br/>
+
+  <div class="container center">
+  <table class="table"id="customers">
+        <thead>
+                <tr>
+                        <th>First Name </th>
+                        <th>Last Name </th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>SSN</th>
+                        <th>Home Address</th>
+                </tr>
+        </thead>
+        <tbody>
+                {% for  MOD1 in BUS449 %}
+                        <tr>    
+                              <td>{{ MOD1.first_name }}</td>
+                                <td>{{ MOD1.lastname }}</td>
+                                <td>{{ MOD1.email }}</td>
+                                <td>{{ MOD1.phone }}</td>
+                                <td>{{ MOD1.SSN }}</td>
+                                <td>{{ MOD1.home_address }}</td>
+                        </tr>
+                {% endfor %}
+        </tbody>
+</table>
+<div>
+</div>
+<!--  <div class = "pagination">
+    <span class="step-links">
+        {% if MOD1.has_previous %}
+          <!--  <a class='btn btn-outline-info mb-4' href="?page=1">first</a>-->
+            <a class='btn btn-outline-info mb-4' href="?page={{ MOD1.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class='btn btn-outline-info mb-4' class="current">
+            Page {{ MOD1.number }} of {{ MOD1.paginator.num_pages }}.
+        </span>
+
+
+        {% if MOD1.has_next %}
+          <a class='btn btn-outline-info mb-4' href="?page={{ MOD1.next_page_number }}">next</a>
+          <!--  <a class='btn btn-outline-info mb-4' href="?page={{ MOD1.paginator.num_pages }}">last</a>-->
+        {% endif %}
+    </span>
+</div>
+</body>
+</html>
